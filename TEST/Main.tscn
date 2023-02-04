@@ -9,7 +9,7 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, -15, 0, 0, 0, 0, 480, -15, 0, 0, 0, 0, 480, 705, 0, 0, 0, 0, 0, 705, 0, 0, 0, 0, 0, -15 )
+"points": PoolVector2Array( 0, 0, 0, 0, -6, 835.826, 0, 0, 0, 0, 1920, 838, 0, 0, 0, 0, 1924, 1066, 0, 0, 0, 0, -2, 1068, 0, 0, 0, 0, -6, 944, 0, 0, 0, 0, -6, 834.855 )
 }
 
 [node name="Main" type="Node"]
@@ -17,9 +17,9 @@ script = ExtResource( 3 )
 mob_scene = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 480.0
-margin_bottom = 720.0
-color = Color( 0.74902, 0, 1, 1 )
+margin_right = 1921.0
+margin_bottom = 1082.0
+color = Color( 0.184314, 0.137255, 0.101961, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
@@ -36,11 +36,13 @@ one_shot = true
 position = Vector2( 240, 450 )
 
 [node name="MobPath" type="Path2D" parent="."]
-position = Vector2( 0, 15 )
+position = Vector2( 3.98756, -16.4008 )
+scale = Vector2( 0.997927, 1.0294 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2( 0, -15 )
+position = Vector2( -6, 835.826 )
+rotation = 0.00114691
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 

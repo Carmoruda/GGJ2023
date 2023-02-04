@@ -80,7 +80,8 @@ func set_hp ( new_hp ):
 		game_over()
 		
 func damage():
-	set_hp(hp - 1)
+	if hp != 0:
+		set_hp(hp - 1)
 	
 	
 

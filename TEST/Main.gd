@@ -17,6 +17,7 @@ func game_over():
 	$Music.stop()
 	$DeathSound.play()
 	$Player.hide()
+	
 
 func new_game():
 	score = 0
@@ -28,6 +29,7 @@ func new_game():
 	$HUD.show_message("Get Ready")
 	get_tree().call_group("mobs", "queue_free")
 	$Music.play()
+	$Path2D/PathFollow2D.gameOn()
 
 func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
@@ -60,11 +62,6 @@ func _on_ScoreTimer_timeout():
 	$HUD.update_score(score)
 
 func _on_StartTimer_timeout():
-	var topmob = topmob_scene.instance()
-	topmob.position = Vector2(0,-100)
-	
-	add_child(topmob)
-	
 	$MobTimer.start()
 	$ScoreTimer.start()
 
@@ -78,6 +75,3 @@ func set_hp ( new_hp ):
 func damage():
 	if hp > 0:
 		set_hp(hp - 1)
-	
-	
-

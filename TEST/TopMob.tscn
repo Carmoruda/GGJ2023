@@ -16,7 +16,7 @@ radius = 24.0
 height = 472.0
 
 [node name="TopMob" type="RigidBody2D"]
-position = Vector2( -61, -426 )
+position = Vector2( -4, -249 )
 gravity_scale = 0.0
 script = ExtResource( 2 )
 __meta__ = {
@@ -24,12 +24,13 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 934, 228 )
+position = Vector2( 5, 125 )
 frames = SubResource( 1 )
 animation = "idle"
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 4, 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 934, 106 )
+position = Vector2( 2, 0 )
 shape = SubResource( 2 )

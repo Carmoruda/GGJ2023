@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
@@ -7,10 +7,16 @@
 [ext_resource path="res://art/House In a Forest Loop.ogg" type="AudioStream" id=5]
 [ext_resource path="res://art/gameover.wav" type="AudioStream" id=6]
 [ext_resource path="res://TopMob.tscn" type="PackedScene" id=7]
+[ext_resource path="res://PathFollow2D.gd" type="Script" id=8]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -6, 835.826, 0, 0, 0, 0, 1920, 838, 0, 0, 0, 0, 1924, 1066, 0, 0, 0, 0, -2, 1068, 0, 0, 0, 0, -6, 944, 0, 0, 0, 0, -6, 834.855 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 265, -50, 0, 0, 0, 0, 274, 316, 0, 0, 0, 0, 267, 212, 0, 0, 0, 0, 267, 440, 0, 0, 0, 0, 262, 283, 0, 0, 0, 0, 379, 349, 0, 0, 0, 0, 410, 357, 0, 0, 0, 0, 445, 411, 0, 0, 0, 0, 545, 307, 0, 0, 0, 0, 438, 280, 0, 0, 0, 0, 643, 269, 0, 0, 0, 0, 510, 497, 0, 0, 0, 0, 683, 468, 0, 0, 0, 0, 609, 383, 0, 0, 0, 0, 778, 333, 0, 0, 0, 0, 778, 476, 0, 0, 0, 0, 736, 540, 0, 0, 0, 0, 854, 476, 0, 0, 0, 0, 907, 423, 0, 0, 0, 0, 716, 357, 0, 0, 0, 0, 719, 242, 0, 0, 0, 0, 624, 523, 0, 0, 0, 0, 436, 487, 0, 0, 0, 0, 843, 342, 0, 0, 0, 0, 921, 580, 0, 0, 0, 0, 1038, 552, 0, 0, 0, 0, 990, 487, 0, 0, 0, 0, 931, 347, 0, 0, 0, 0, 1092, 373, 0, 0, 0, 0, 957, 480, 0, 0, 0, 0, 1085, 518, 0, 0, 0, 0, 1149, 547, 0, 0, 0, 0, 1164, 404, 0, 0, 0, 0, 964, 544, 0, 0, 0, 0, 1202, 597, 0, 0, 0, 0, 1235, 473, 0, 0, 0, 0, 1178, 311, 0, 0, 0, 0, 1068, 430, 0, 0, 0, 0, 828, 597, 0, 0, 0, 0, 1021, 642, 0, 0, 0, 0, 593, 594, 0, 0, 0, 0, 424, 514, 0, 0, 0, 0, 372, 407, 0, 0, 0, 0, 353, 276, 0, 0, 0, 0, 322, 461, 0, 0, 0, 0, 234, 490, 0, 0, 0, 0, 184, 359, 0, 0, 0, 0, 203, 307, 0, 0, 0, 0, 27, 261, 0, 0, 0, 0, 98, 364, 0, 0, 0, 0, 155, 250, 0, 0, 0, 0, 79, 509, 0, 0, 0, 0, -80, 242, 0, 0, 0, 0, -49, 590, 0, 0, 0, 0, -164, 694, 0, 0, 0, 0, -432, 521, 0, 0, 0, 0, -64, 668, 0, 0, 0, 0, -373, 740, 0, 0, 0, 0, -582, 697, 0, 0, 0, 0, -349, 476, 0, 0, 0, 0, -582, 395, 0, 0, 0, 0, -392, 642, 0, 0, 0, 0, -263, 813, 0, 0, 0, 0, 32, 625, 0, 0, 0, 0, -147, 456, 0, 0, 0, 0, 205, 618, 0, 0, 0, 0, 155, 801, 0, 0, 0, 0, 350, 745, 0, 0, 0, 0, 501, 923, 0, 0, 0, 0, 624, 862, 0, 0, 0, 0, 686, 785, 0, 0, 0, 0, 393, 662, 0, 0, 0, 0, 747, 683, 0, 0, 0, 0, 344, 551, 0, 0, 0, 0, 52, 751, 0, 0, 0, 0, -185, 545, 0, 0, 0, 0, -360, 271, 0, 0, 0, 0, 265, -50 )
 }
 
 [node name="Main" type="Node"]
@@ -53,6 +59,21 @@ stream = ExtResource( 5 )
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 642, -221 )
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 265, -49.998 )
+rotation = -6.28319
+offset = 0.00390625
+rotate = false
+lookahead = 0.001
+script = ExtResource( 8 )
+
+[node name="TopMob" parent="Path2D/PathFollow2D" instance=ExtResource( 7 )]
+position = Vector2( -3.99994, -1.00002 )
 
 [connection signal="hit" from="Player" to="." method="damage"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

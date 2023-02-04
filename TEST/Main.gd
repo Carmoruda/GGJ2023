@@ -5,6 +5,8 @@ export(PackedScene) var topmob_scene
 var score
 var hp = 3 setget set_hp
 
+signal hp_changed
+
 func _ready():
 	randomize()
 
@@ -14,12 +16,15 @@ func game_over():
 	$HUD.show_game_over()
 	$Music.stop()
 	$DeathSound.play()
+	$Player.hide()
 
 func new_game():
 	score = 0
+	hp = 3
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
+	$HUD.update_hp(hp)
 	$HUD.show_message("Get Ready")
 	get_tree().call_group("mobs", "queue_free")
 	$Music.play()
@@ -68,11 +73,14 @@ func _on_TopShowTimer_timeout():
 	var topmob = topmob_scene.instance()
 
 func set_hp ( new_hp ):
+	emit_signal("hp_changed", new_hp)
 	hp = new_hp
+	$HUD.update_hp(hp)
 	if hp <= 0:
 		game_over()
 		
 func damage():
 	set_hp(hp - 1)
+	
 	
 

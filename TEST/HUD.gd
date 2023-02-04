@@ -21,6 +21,8 @@ func show_game_over():
 func update_score(score):
 	$ScoreLabel.text = str(score)
 
+func update_hp(hp):
+	$HPLabel.text = str(hp)
 
 func _on_MessageTimer_timeout():
 	$Message.hide()
@@ -28,3 +30,7 @@ func _on_MessageTimer_timeout():
 func _on_StartButton_pressed():
 	$StartButton.hide()
 	emit_signal("start_game")
+
+
+func _on_Main_hp_changed():
+	pass # Replace with function body.

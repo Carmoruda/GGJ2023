@@ -52,5 +52,11 @@ text = "Start"
 wait_time = 2.0
 one_shot = true
 
+[node name="HPLabel" type="Label" parent="."]
+margin_left = 834.0
+margin_right = 879.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 1 )
+
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

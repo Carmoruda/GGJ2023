@@ -1,7 +1,9 @@
 extends Node
 
 export(PackedScene) var mob_scene
+export(PackedScene) var topmob_scene
 var score
+var hp = 3 setget set_hp
 
 func _ready():
 	randomize()
@@ -29,7 +31,7 @@ func _on_MobTimer_timeout():
 	# Choose a random location on Path2D.
 	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 	mob_spawn_location.offset = randi()
-
+	
 	# Set the mob's direction perpendicular to the path direction.
 	var direction = mob_spawn_location.rotation + PI / 2
 
@@ -53,5 +55,24 @@ func _on_ScoreTimer_timeout():
 	$HUD.update_score(score)
 
 func _on_StartTimer_timeout():
+	var topmob = topmob_scene.instance()
+	topmob.position = Vector2(0,0)
+	
+	add_child(topmob)
+	
 	$MobTimer.start()
 	$ScoreTimer.start()
+	$TopShowTimer.start()
+
+func _on_TopShowTimer_timeout():
+	var topmob = topmob_scene.instance()
+
+func set_hp ( new_hp ):
+	hp = new_hp
+	if hp <= 0:
+		game_over()
+		
+func damage():
+	set_hp(hp - 1)
+	
+

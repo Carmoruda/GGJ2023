@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://arte/Hueso.png" type="Texture" id=1]
+[ext_resource path="res://arte/Piedra 2.png" type="Texture" id=2]
+[ext_resource path="res://arte/Piedra1.png" type="Texture" id=3]
+[ext_resource path="res://arte/Cuarzo.png" type="Texture" id=4]
+[ext_resource path="res://Obstacle.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "cuarzo",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "hueso",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "piedra1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "piedra2",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 219.999
+height = 840.002
+
+[node name="Obstacle" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = -1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.05, 0.05 )
+frames = SubResource( 1 )
+animation = "piedra2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2( 0.05, 0.05 )
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

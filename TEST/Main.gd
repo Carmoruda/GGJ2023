@@ -61,26 +61,22 @@ func _on_ScoreTimer_timeout():
 
 func _on_StartTimer_timeout():
 	var topmob = topmob_scene.instance()
-	topmob.position = Vector2(0,0)
+	topmob.position = Vector2(0,-100)
 	
 	add_child(topmob)
 	
 	$MobTimer.start()
 	$ScoreTimer.start()
-	$TopShowTimer.start()
-
-func _on_TopShowTimer_timeout():
-	var topmob = topmob_scene.instance()
 
 func set_hp ( new_hp ):
 	emit_signal("hp_changed", new_hp)
 	hp = new_hp
 	$HUD.update_hp(hp)
-	if hp <= 0:
+	if hp == 0:
 		game_over()
 		
 func damage():
-	if hp != 0:
+	if hp > 0:
 		set_hp(hp - 1)
 	
 	
